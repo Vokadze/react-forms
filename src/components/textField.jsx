@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TextField = (props) => {
-    const { name, label, value, onChange, type } = props;
+    const { name, label, value, onChange, type, error } = props;
     return (
-        <p>
+        <div>
             <label htmlFor={name}>{label}</label>{" "}
             <input
                 value={value}
@@ -13,7 +13,8 @@ const TextField = (props) => {
                 type={type}
                 name={name}
             />
-        </p>
+            {error && <p>{error}</p>}
+        </div>
     );
 };
 
@@ -26,7 +27,8 @@ TextField.propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string,
+    error: PropTypes.string
 };
 
 export default TextField;

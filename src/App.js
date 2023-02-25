@@ -1,8 +1,8 @@
 import React from "react";
-import MyForms from "./components/myForms";
+import MyForm from "./components/myForm";
 
 function App() {
-    return <MyForms />;
+    return <MyForm />;
 }
 
 export default App;

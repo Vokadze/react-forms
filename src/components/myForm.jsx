@@ -7,7 +7,8 @@ const MyForm = () => {
     const [values, setValues] = useState({
         email: "",
         link: "",
-        description: ""
+        description: "",
+        password: ""
     });
     const [errors, setErrors] = useState({});
     const isValid = Object.keys(errors).length === 0;
@@ -33,7 +34,7 @@ const MyForm = () => {
         }));
     };
 
-    const { email, link, description } = values;
+    const { email, link, description, password } = values;
 
     return (
         <div className="container mt-5">
@@ -67,7 +68,21 @@ const MyForm = () => {
                             error={errors.description}
                         />
 
-                        <button disabled={!isValid} type="submit">
+                        <TextField
+                            id="password"
+                            name="password"
+                            label="Пароль"
+                            value={password}
+                            onChange={handleChange}
+                            error={errors.password}
+                            type="password"
+                        />
+
+                        <button
+                            className="btn btn-primary w-100 mx-auto"
+                            disabled={!isValid}
+                            type="submit"
+                        >
                             Отправить
                         </button>
                     </form>

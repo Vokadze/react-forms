@@ -3,17 +3,24 @@ import PropTypes from "prop-types";
 
 const TextField = (props) => {
     const { name, label, value, onChange, type, error } = props;
+
+    const getInputClasses = () => {
+        return "form-control" + (error ? " is-invalid" : "");
+    };
     return (
-        <div>
+        <div className="mb-4">
             <label htmlFor={name}>{label}</label>{" "}
-            <input
-                value={value}
-                onChange={onChange}
-                id={name}
-                type={type}
-                name={name}
-            />
-            {error && <p>{error}</p>}
+            <div className="input-group has-validation">
+                <input
+                    value={value}
+                    onChange={onChange}
+                    id={name}
+                    type={type}
+                    name={name}
+                    className={getInputClasses()}
+                />
+                {error && <div className="invalid-feedback">{error}</div>}
+            </div>
         </div>
     );
 };

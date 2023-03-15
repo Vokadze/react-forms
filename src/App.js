@@ -1,6 +1,5 @@
 import React from "react";
-// import FeedbackForm from "./components/feedback-form/feedbackForm";
- import "./index.css";
+import "./index.css";
 import { Route, Switch } from "react-router-dom";
 import MainPage from "./pages/mainPage";
 import FeedbackPage from "./pages/feedbackPage";

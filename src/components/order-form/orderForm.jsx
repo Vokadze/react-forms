@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import FormLayout from "../formLayout";
 import TextField from "../textField";
 import SelectField from "../selectField";
+import RadioField from "./radioField";
 import { validate } from "../../utils/validator";
 import { validationSchema } from "./validationSchema";
-import { deliveryTypeList } from "./fieldsOptions";
+import { deliveryTypeList, needLiftFloorOptions } from "./fieldsOptions";
 
 const OrderForm = () => {
     const [values, setValues] = useState({
         fio: "",
         email: "",
-        deliveryType: ""
+        deliveryType: "",
+        needLiftFloor: ""
     });
     const [errors, setErrors] = useState({});
 
@@ -60,6 +62,14 @@ const OrderForm = () => {
                     error={errors.deliveryType}
                     options={deliveryTypeList}
                     defaultOptions="Выберите вариант доставки"
+                />
+                <RadioField
+                    options={needLiftFloorOptions}
+                    label="Нужен подъём на этаж?"
+                    value={values.needLiftFloor}
+                    name="needLiftFloor"
+                    onChange={handleChange}
+                    error={errors.needLiftFloor}
                 />
                 <button className="btn btn-primary w-100 mx-auto" type="submit">
                     Оформить

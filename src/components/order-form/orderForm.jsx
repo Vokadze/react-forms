@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import FormLayout from "../formLayout";
 import TextField from "../textField";
+import SelectField from "../selectField";
 import { validate } from "../../utils/validator";
 import { validationSchema } from "./validationSchema";
+import { deliveryTypeList } from "./fieldsOptions";
 
 const OrderForm = () => {
-    const [values, setValues] = useState({ fio: "", email: "" });
+    const [values, setValues] = useState({
+        fio: "",
+        email: "",
+        deliveryType: ""
+    });
     const [errors, setErrors] = useState({});
 
     const isValid = Object.keys(errors).length === 0;
@@ -45,6 +51,15 @@ const OrderForm = () => {
                     value={values.email}
                     onChange={handleChange}
                     error={errors.email}
+                />
+                <SelectField
+                    label="Выберите доставку"
+                    name="deliveryType"
+                    value={values.deliveryType}
+                    onChange={handleChange}
+                    error={errors.deliveryType}
+                    options={deliveryTypeList}
+                    defaultOptions="Выберите вариант доставки"
                 />
                 <button className="btn btn-primary w-100 mx-auto" type="submit">
                     Оформить

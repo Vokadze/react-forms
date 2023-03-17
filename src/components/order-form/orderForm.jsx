@@ -3,16 +3,22 @@ import FormLayout from "../formLayout";
 import TextField from "../textField";
 import SelectField from "../selectField";
 import RadioField from "./radioField";
+import MultiSelect from "../multiSelect";
 import { validate } from "../../utils/validator";
 import { validationSchema } from "./validationSchema";
-import { deliveryTypeList, needLiftFloorOptions } from "./fieldsOptions";
+import {
+    deliveryTypeList,
+    needLiftFloorOptions,
+    giftList
+} from "./fieldsOptions";
 
 const OrderForm = () => {
     const [values, setValues] = useState({
         fio: "",
         email: "",
         deliveryType: "",
-        needLiftFloor: ""
+        needLiftFloor: "",
+        giftst: []
     });
     const [errors, setErrors] = useState({});
 
@@ -26,6 +32,7 @@ const OrderForm = () => {
     };
 
     const handleChange = (e) => {
+        console.log(e);
         const { value, name } = e.target;
         setValues((prev) => ({ ...prev, [name]: value }));
     };
@@ -70,6 +77,13 @@ const OrderForm = () => {
                     name="needLiftFloor"
                     onChange={handleChange}
                     error={errors.needLiftFloor}
+                />
+                <MultiSelect
+                    options={giftList}
+                    onChange={handleChange}
+                    value={values.giftst}
+                    name="giftst"
+                    label="Выберите подарок"
                 />
                 <button className="btn btn-primary w-100 mx-auto" type="submit">
                     Оформить

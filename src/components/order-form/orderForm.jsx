@@ -4,12 +4,15 @@ import TextField from "../textField";
 import SelectField from "../selectField";
 import RadioField from "./radioField";
 import MultiSelect from "../multiSelect";
+import CheckboxField from "../checkboxField";
+import SingleCheckboxField from "../singleCheckboxField";
 import { validate } from "../../utils/validator";
 import { validationSchema } from "./validationSchema";
 import {
     deliveryTypeList,
     needLiftFloorOptions,
-    giftList
+    giftList,
+    agreements
 } from "./fieldsOptions";
 
 const OrderForm = () => {
@@ -18,7 +21,9 @@ const OrderForm = () => {
         email: "",
         deliveryType: "",
         needLiftFloor: "",
-        giftst: []
+        giftst: [],
+        agreement: [],
+        test: false
     });
     const [errors, setErrors] = useState({});
 
@@ -84,6 +89,21 @@ const OrderForm = () => {
                     value={values.giftst}
                     name="giftst"
                     label="Выберите подарок"
+                />
+
+                <CheckboxField
+                    name="agreement"
+                    label="Подтвердите согласие"
+                    options={agreements}
+                    onChange={handleChange}
+                    value={values.agreement}
+                    error={errors.agreement}
+                />
+                <SingleCheckboxField
+                    name="test"
+                    onChange={handleChange}
+                    value={values.test}
+                    label="Проверка"
                 />
                 <button className="btn btn-primary w-100 mx-auto" type="submit">
                     Оформить

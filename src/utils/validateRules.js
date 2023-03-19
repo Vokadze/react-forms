@@ -9,5 +9,7 @@ export default {
     isContainDigit: (value) => /d+/g.test(value),
     // ФИО
     isFIO: (value) =>
-        /^(([a-zA-Zа-яА-Я]+)\s+){1,}(([a-zA-Zа-яА-Я]+)\s?){1,}$/g.test(value)
+        /^(([a-zA-Zа-яА-Я]+)\s+){1,}(([a-zA-Zа-яА-Я]+)\s?){1,}$/g.test(value),
+    // Массив содержит значение
+    isContainValue: (array, value) => array.includes(value)
 };

@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import FormLayout from "../formLayout";
 import TextField from "../textField";
 import SelectField from "../selectField";
-import RadioField from "./radioField";
+import RadioField from "../radioField";
 import MultiSelect from "../multiSelect";
 import CheckboxField from "../checkboxField";
-import SingleCheckboxField from "../singleCheckboxField";
-import { validate } from "../../utils/validator";
 import { validationSchema } from "./validationSchema";
 import {
     deliveryTypeList,
@@ -14,6 +12,7 @@ import {
     giftList,
     agreements
 } from "./fieldsOptions";
+import { parceYupError } from "../../utils/parceYupError";
 
 const OrderForm = () => {
     const [values, setValues] = useState({
@@ -22,9 +21,9 @@ const OrderForm = () => {
         deliveryType: "",
         needLiftFloor: "",
         giftst: [],
-        agreement: [],
-        test: false
+        agreement: []
     });
+
     const [errors, setErrors] = useState({});
 
     const isValid = Object.keys(errors).length === 0;
@@ -39,12 +38,20 @@ const OrderForm = () => {
     const handleChange = (e) => {
         console.log(e);
         const { value, name } = e.target;
-        setValues((prev) => ({ ...prev, [name]: value }));
+        setValues((prev) => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
     useEffect(() => {
-        const errors = validate(values, validationSchema);
-        setErrors(errors);
+        validationSchema
+            .validate(values, { abortEarly: false })
+            .then(() => setErrors({}))
+            .catch((yupError) => {
+                const errors = parceYupError(yupError);
+                setErrors(errors);
+            });
     }, [values]);
 
     return (
@@ -61,7 +68,7 @@ const OrderForm = () => {
                 <TextField
                     id="email"
                     name="email"
-                    label="email"
+                    label="Email"
                     value={values.email}
                     onChange={handleChange}
                     error={errors.email}
@@ -99,12 +106,7 @@ const OrderForm = () => {
                     value={values.agreement}
                     error={errors.agreement}
                 />
-                <SingleCheckboxField
-                    name="test"
-                    onChange={handleChange}
-                    value={values.test}
-                    label="Проверка"
-                />
+
                 <button className="btn btn-primary w-100 mx-auto" type="submit">
                     Оформить
                 </button>

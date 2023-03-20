@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const SelectField = (props) => {
-    const { label, name, value, onChange, error, options, defaultOptions } =
+    const { label, name, value, onChange, error, options, defaultOption } =
         props;
 
     const getSelectClasses = () => {
@@ -22,7 +22,7 @@ const SelectField = (props) => {
                 name={name}
             >
                 <option value="" disabled>
-                    {defaultOptions}
+                    {defaultOption}
                 </option>
                 {options.map(({ value, label }) => (
                     <option key={value} value={value}>
@@ -36,7 +36,7 @@ const SelectField = (props) => {
 };
 
 SelectField.defaultProps = {
-    defaultOptions: "Выберите вариант..."
+    defaultOption: "Выберите вариант..."
 };
 
 SelectField.propTypes = {
@@ -51,7 +51,7 @@ SelectField.propTypes = {
             value: PropTypes.string.isRequired
         })
     ),
-    defaultOptions: PropTypes.string.isRequired
+    defaultOption: PropTypes.string.isRequired
 };
 
 export default SelectField;

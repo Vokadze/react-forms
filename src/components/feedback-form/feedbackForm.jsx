@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import TextField from "../../components/textField";
+import TextField from "../textField";
 import { validate } from "../../utils/validator";
-import { validationSchema } from "../../components/feedback-form/validationSchema";
+import { validationSchema } from "./validationSchema";
 import FormLayout from "../formLayout";
 
 const FeedbackForm = () => {
@@ -38,54 +38,52 @@ const FeedbackForm = () => {
     const { email, link, description, password } = values;
 
     return (
-        <>
-            <FormLayout title="Отчет об ошибке">
-                <form onSubmit={handleSubmit}>
-                    <TextField
-                        id="email"
-                        name="email"
-                        label="Email"
-                        value={email}
-                        onChange={handleChange}
-                        error={errors.email}
-                    />
-                    <TextField
-                        id="link"
-                        name="link"
-                        label="Ссылка на страницу с ошибкой"
-                        value={link}
-                        onChange={handleChange}
-                        error={errors.link}
-                    />
-                    <TextField
-                        id="description"
-                        name="description"
-                        label="Описание"
-                        value={description}
-                        onChange={handleChange}
-                        error={errors.description}
-                    />
+        <FormLayout title="Отчет об ошибке">
+            <form onSubmit={handleSubmit}>
+                <TextField
+                    id="email"
+                    name="email"
+                    label="Email"
+                    value={email}
+                    onChange={handleChange}
+                    error={errors.email}
+                />
+                <TextField
+                    id="link"
+                    name="link"
+                    label="Ссылка на страницу с ошибкой"
+                    value={link}
+                    onChange={handleChange}
+                    error={errors.link}
+                />
+                <TextField
+                    id="description"
+                    name="description"
+                    label="Описание"
+                    value={description}
+                    onChange={handleChange}
+                    error={errors.description}
+                />
 
-                    <TextField
-                        id="password"
-                        name="password"
-                        label="Пароль"
-                        value={password}
-                        onChange={handleChange}
-                        error={errors.password}
-                        type="password"
-                    />
+                <TextField
+                    id="password"
+                    name="password"
+                    label="Пароль"
+                    value={password}
+                    onChange={handleChange}
+                    error={errors.password}
+                    type="password"
+                />
 
-                    <button
-                        className="btn btn-primary w-100 mx-auto"
-                        disabled={!isValid}
-                        type="submit"
-                    >
-                        Отправить
-                    </button>
-                </form>
-            </FormLayout>
-        </>
+                <button
+                    className="btn btn-primary w-100 mx-auto"
+                    disabled={!isValid}
+                    type="submit"
+                >
+                    Отправить
+                </button>
+            </form>
+        </FormLayout>
     );
 };
 

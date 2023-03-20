@@ -12,6 +12,7 @@ export const validationSchema = yup.object().shape({
         .string()
         .required("Электронная почта обязательна для заполнения")
         .email("Email введён некорректно"),
+    address: yup.string().required("Адрес обязателен для заполнения"),
     deliveryType: yup.string().required("Выберите вариант доставки"),
     needLiftFloor: yup.string().required("Укажите нужен ли подъём на этаж"),
     agreement: yup

@@ -1,62 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import FormLayout from "../formLayout";
 import TextField from "../textField";
 import SelectField from "../selectField";
 import RadioField from "../radioField";
 import MultiSelect from "../multiSelect";
 import CheckboxField from "../checkboxField";
-import { validationSchema } from "./validationSchema";
 import {
     deliveryTypeList,
     needLiftFloorOptions,
     giftList,
     agreements
 } from "./fieldsOptions";
-import { parceYupError } from "../../utils/parceYupError";
+import { useOrderContext } from "../../order-context";
 
 const OrderForm = () => {
-    const [values, setValues] = useState({
-        fio: "",
-        email: "",
-        address: "",
-        deliveryType: "",
-        needLiftFloor: "",
-        giftst: [],
-        agreement: []
-    });
-
-    const [errors, setErrors] = useState({});
-
-    const isValid = Object.keys(errors).length === 0;
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (isValid) {
-            console.log("Отправлено!");
-        }
-    };
-
-    const handleChange = (e) => {
-        console.log(e);
-        const { value, name } = e.target;
-        setValues((prev) => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    useEffect(() => {
-        validationSchema
-            .validate(values, { abortEarly: false })
-            .then(() => setErrors({}))
-            .catch((yupError) => {
-                const errors = parceYupError(yupError);
-                setErrors(errors);
-            });
-    }, [values]);
+    const { handleSubmit, values, handleChange, errors, loading } = useOrderContext();
 
     return (
         <FormLayout title="Оформление заказа">
+            {loading && "Загрузка..."}
             <form onSubmit={handleSubmit}>
                 <TextField
                     id="fio"
@@ -116,7 +78,11 @@ const OrderForm = () => {
                     error={errors.agreement}
                 />
 
-                <button className="btn btn-primary w-100 mx-auto" type="submit">
+                <button
+                    disabled={loading}
+                    className="btn btn-primary w-100 mx-auto"
+                    type="submit"
+                >
                     Оформить
                 </button>
             </form>

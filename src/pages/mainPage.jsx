@@ -1,17 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const MainPage = () => {
-    return (
-        <div>
-            <p>
-                <Link to="/feedback">Обратная связь</Link>
-            </p>
-            <p>
-                <Link to="/order">Оформление заказа</Link>
-            </p>
-        </div>
-    );
+const SomeComponent = ({ data }) => {
+    return <div></div>;
 };
 
-export default MainPage;
+export default () => <SomeComponent data={[1, 3, 4]} />;
